@@ -11,9 +11,6 @@ public class Operate15 {
 //		snum1 = snum1 +snum2;
 		
 		System.out.println(snum1);
-		
-		
-		
 	}
 
 }
