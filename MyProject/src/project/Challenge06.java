@@ -10,7 +10,7 @@ public class Challenge06 {
 			System.out.println(i);
 			i++;
 		}
-		
+		 
 	}
 
 }
