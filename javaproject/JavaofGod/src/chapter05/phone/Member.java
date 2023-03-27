@@ -19,6 +19,8 @@ public class Member {
 	public Member(String name, String email) {
 		this.name = name;
 		this.email = email;
+		this.age = 20;
+		this.phoneNumber = "입력데이터가 없습니다."; //기본값을 넣어주는 것이다.
 	}
 	
 	void showData() {
