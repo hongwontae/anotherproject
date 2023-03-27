@@ -10,11 +10,11 @@ public class Challenge07 {
 			i++;
 		} 
 		
+		
 		do {
 			--i;
 			System.out.println(i);
 		   } while(i>1);
-		
 		
 	}
 
