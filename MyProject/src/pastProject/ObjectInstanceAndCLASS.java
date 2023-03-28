@@ -8,16 +8,7 @@ public class ObjectInstanceAndCLASS {
 	String email;
 	String birthday;
 	String address;
-
-	void print() {
-		System.out.println("이름 : " + name);
-		System.out.println("전화번호 : " + number);
-		System.out.println("전공 : " + major);
-		System.out.println("이메일 : " + email);
-		System.out.println("생일 : " + birthday);
-		System.out.println("주소 : " + address);
-	}
-
+	
 	ObjectInstanceAndCLASS(String name, String number, String major, String email, String birthday, String address) {
 		this.name = name;
 		this.number = number;
@@ -36,5 +27,16 @@ public class ObjectInstanceAndCLASS {
 		this.address = "정의하지 않겠다";
 
 }
+
+	void print() {
+		System.out.println("이름 : " + name);
+		System.out.println("전화번호 : " + number);
+		System.out.println("전공 : " + major);
+		System.out.println("이메일 : " + email);
+		System.out.println("생일 : " + birthday);
+		System.out.println("주소 : " + address);
+	}
+
+
 	
 }
