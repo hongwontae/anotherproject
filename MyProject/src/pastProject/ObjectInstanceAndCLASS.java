@@ -57,7 +57,7 @@ public class ObjectInstanceAndCLASS {
 //			System.out.println("주소 : 미입력");}
 //		}
 //	
-		System.out.println("조소 : "+ (address !=null ? address : "미입력"));
+		System.out.println("주소 : "+ (address !=null ? address : "미입력"));
 	
 
 
