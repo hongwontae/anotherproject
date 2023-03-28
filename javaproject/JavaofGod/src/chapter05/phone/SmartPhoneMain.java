@@ -18,7 +18,15 @@ public class SmartPhoneMain {
 		System.out.println(sp1.color);
 		System.out.println(sp2.size);
 		System.out.println(sp3.volume);
+		
+		Member member = new Member("king", "dnjsxoghd", 20,"010-1111-7777",sp2);
+			
+		pirntInfo(member);
 
+	}
+	
+	static void pirntInfo(Member member) {
+		member.showData();
 	}
 
 }
