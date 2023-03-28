@@ -23,7 +23,7 @@ public class SmartPhone {
 	
 	SmartPhone(String color, float size){
 		
-		this(color, size, 0); // this() 다른 생성자를 호출하는 기능을 가진다.
+		this(color, size,0); // this() 다른 생성자를 호출하는 기능을 가진다.
 		
 //		this.color=color;
 //		this.size=size;
