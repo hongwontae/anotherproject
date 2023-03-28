@@ -12,7 +12,18 @@ public class ContactMain {
 		System.out.println("주소 : "+c.getAddress());
 		System.out.println("생일 : "+c.getBirthday());
 		System.out.println("그룹 : "+c.getGroup());
-
+		
+		System.out.println("-------------------------------------------");
+		
+		c.printData();
+		
+		c.setPhoneNumber("010-9999-8888");
+		c.setEmail("google.gmail");
+		c.setAddress("Madrid");
+		c.setBirthday("1990-88-99");
+		
+		System.out.println();
+		c.printData();
 	}
 
 }
