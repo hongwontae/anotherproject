@@ -20,5 +20,8 @@ public class Person {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	public void tell() {
+		System.out.println("안녕하세요 "+age+" 살"+"입니다.");
+	}
 
 }
