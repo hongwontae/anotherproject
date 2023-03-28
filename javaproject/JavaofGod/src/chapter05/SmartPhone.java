@@ -3,7 +3,7 @@ package chapter05;
 public class SmartPhone {
 
 	// 변수 선언 : 멤버변수, 인스턴스 변수라고도 한다.(이상태로 실행x) 멤버들 끼리는 공유 가능하다.
-	String color = "white"; // 속성 : 색상 갑 (변수로 선언)
+	String color = "white"; // 속성 : 색상 값 (변수로 선언)
 	float size = 5.7f; // 속성 : 사이즈 (변수로 선언)
 	int volume = 0; // 속성 : 볼륨의 크기 (변수로 선언)
 
