@@ -82,12 +82,12 @@ public class ClassContact {
 	}
 	
 	public void printData() {
-		System.out.println("이름"+name);
-		System.out.println("전화번호"+phoneNumber);
-		System.out.println("이메일"+email);
-		System.out.println("주소"+address);
-		System.out.println("생일"+birthday);
-		System.out.println("그룹"+group);
+		System.out.println("이름 : "+name);
+		System.out.println("전화번호 : "+phoneNumber);
+		System.out.println("이메일 : "+email);
+		System.out.println("주소 : "+address);
+		System.out.println("생일 : "+birthday);
+		System.out.println("그룹 : "+group);
 	}
 	
 	
