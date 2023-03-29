@@ -27,7 +27,7 @@ public class MemberName {
 		dataPrint(member2);
 	}
 
-	static void dataPrint(Member member) { // 전달받는 목적
+	static void dataPrint(Member member) { // 전달받는 목적 인스턴스를 참조하는 주소값
 
 		// Member member = member 1;
 		// Member member : 매개변수이면서 참조변수이다.
