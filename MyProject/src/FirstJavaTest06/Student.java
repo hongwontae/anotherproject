@@ -51,9 +51,9 @@ public class Student {
 		this.mathScore = mathScore;
 	}
 	
-	// 총점을 계산해서 반환하는 메서드
+	// 총점 계산해서 반환 하는 메소드
 	private int sum() {
-		return korScore + engScore+ mathScore;
+		return korScore + engScore + mathScore;
 	}
 	
 	private float avg() {
@@ -61,14 +61,26 @@ public class Student {
 	}
 	
 	public String result() {
-		return korScore+"\t"+engScore+"\t"+mathScore+"\t"+sum()+"\t"+avg();
+		return sName+"\t"+ korScore+"\t"+engScore+"\t"+mathScore+"\t"+sum()+"\t"+avg();
 	}
 
 	@Override
 	public String toString() {
-		return "Student [sName=" + sName + ", korScore=" + korScore + ", engScore=" + engScore + ", mathScore="
-				+ mathScore + "]";
+		/*
+		 * return "Student [sName=" + sName + ", korScore=" + korScore + ", engScore=" +
+		 * engScore + ", mathScore=" + mathScore + "]";
+		 */
+		return result();
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
