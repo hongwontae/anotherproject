@@ -12,7 +12,7 @@ public class Challenge09 {
 			result *= i;
 			
 			
-		}
+		} 
 		System.out.println("결과값은 " + result);
 
 	}
