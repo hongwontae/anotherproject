@@ -3,7 +3,7 @@ package codingHaeBogi10;
 import java.util.Scanner;
 
 public class BadInputExceptionMain {
-	
+
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("아이디를 입력하세요");
@@ -13,28 +13,16 @@ public class BadInputExceptionMain {
 			for (int i = 0; i < id.length(); i++) {
 				char c = id.charAt(i);
 				if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9')) {
-					BadIdInputException e = new BadIdInputException("사용자의 입력 값이 올바르지 않습니다.");
+					BadIdInputException e = new BadIdInputException("입력값 오류.");
 					throw e;
 				}
 			}
 		}
 
 		catch (BadIdInputException e) {
-			System.out.println("사용자의 입력 값이 올바르지 않습니다.");
-		}
-	}
-
-	static boolean checkId(String id) {
-
-		boolean result = true;
-		for (int i = 0; i < id.length(); i++) {
-			char c = id.charAt(i);
-			if (!(c >= 'a' && c <= 'z' || c >= 'A' && c <= 'Z' || c >= '0' && c <= '9')) {
-				result = false;
-				break;
-			}
+			System.out.println("입력값 오류.");
 		}
 
-		return result;
 	}
+
 }
