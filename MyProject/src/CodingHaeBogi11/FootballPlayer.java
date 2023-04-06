@@ -1,9 +1,8 @@
 package CodingHaeBogi11;
 
-
-//축구선수의 정보를 저장하는 클래스이다. : 축구선수 데이터 저장 => 인스턴스 생성 =>베열 => List
-public class FootballPlayer {
-
+// 축구선수의 정보를 저장하는 클래스 : 축구선수 데이터저장 -> 인스턴스 생성 -> 배열 -> List
+public class FootballPlayer implements Comparable<FootballPlayer>{
+	
 	private String name;
 	private int number;
 	private String team;
@@ -15,11 +14,11 @@ public class FootballPlayer {
 		this.team = team;
 		this.age = age;
 	}
-	
+
 	public FootballPlayer() {
-		//기본생성자
+		// 기본생성자 
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -52,15 +51,37 @@ public class FootballPlayer {
 		this.age = age;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "FootballPlayer [name=" + name + ", number=" + number + ", team=" + team + ", age=" + age + "]";
 	}
 	
 	public void showInfo() {
-		System.out.printf("[%s] %s(%d, %d)", this.team, this.name, this.number, this.age);
+		System.out.printf("[%s] %s(%d, %d)\n", this.team, this.name, this.number, this.age);
 	}
 
+	@Override
+	public int compareTo(FootballPlayer o) {
+		
+		int compare = this.team.compareTo(o.getTeam());
+		
+		if(compare == 0) {
+			compare = this.name.compareTo(o.getName());
+			
+			if(compare == 0) {
+				compare = this.number - o.getNumber();
+				//compare = Integer.compare(this.number, o.getNumber());
+			}
+		}
+		return compare;
+	}
+	
+	
+
+	
 	
 }
+
+
+
+
