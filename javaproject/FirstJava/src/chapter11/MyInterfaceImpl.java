@@ -1,6 +1,6 @@
 package chapter11;
 
-public class MyInterfaceImpI<T1, T2> implements MyInterface<T1, T2> {
+public class MyInterfaceImpl<T1, T2> implements MyInterface<T1, T2> {
 
 	@Override
 	public T1 method1(T1 t) {
@@ -14,14 +14,20 @@ public class MyInterfaceImpI<T1, T2> implements MyInterface<T1, T2> {
 		return t;
 	}
 	
-	
 	public static void main(String[] args) {
-		MyInterface<String, Integer> my = null;
-//		my= new MyInterfaceImpI<String, integer()>
-		my = new MyInterfaceImpI();
+		
+		MyInterfaceImpl<String, Integer> my = null;
+		//my = new MyInterfaceImpl<String, Integer>();
+		my = new MyInterfaceImpl();
 		
 		System.out.println(my.method1("Ten"));
 		System.out.println(my.method2(10));
+		
 	}
+	
 
 }
+
+
+
+

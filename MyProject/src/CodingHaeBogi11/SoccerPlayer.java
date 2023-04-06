@@ -1,4 +1,4 @@
-package codingHaeBogi11;
+package CodingHaeBogi11;
 
 import java.util.ArrayList;
 import java.util.List;
