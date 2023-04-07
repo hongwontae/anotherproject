@@ -56,6 +56,27 @@ public class FootballPlayer implements Comparable<FootballPlayer>{
 		return "FootballPlayer [name=" + name + ", number=" + number + ", team=" + team + ", age=" + age + "]";
 	}
 	
+	@Override
+	public int hashCode() {
+		
+		return this.age;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean result = false;
+		
+		if(obj !=null && obj instanceof FootballPlayer) {
+			FootballPlayer player = (FootballPlayer)obj;
+			result = this.team.equals(player.getTeam())&& 
+					this.name.equals(player.getName())&&
+					this.age==player.getAge();
+		}
+		
+		return result;
+	}
+
+	
 	public void showInfo() {
 		System.out.printf("[%s] %s(%d, %d)\n", this.team, this.name, this.number, this.age);
 	}
