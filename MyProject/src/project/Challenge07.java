@@ -2,20 +2,26 @@ package project;
 
 public class Challenge07 {
 
-	public static void main(String[] args) {
-		
-		int i =1;
-		while(i<=100) {
-			System.out.println(i);
-			i++;
-		} 
-		
-		
-		do {
-			--i;
-			System.out.println(i);
-		   } while(i>1);
+	public static int korea() {
+		int a=10;
+		int b=5;
+		int result = a*b;
+		int result2 = a/b;
+		return result;
+//		return result2;
 		
 	}
-
+	
+	public static void main(String[] args) {
+		
+		System.out.println(korea());
+		
+		
+	}
+	
+	
+	
+	
+	
+	
 }
