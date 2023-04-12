@@ -115,6 +115,190 @@ SELECT TRUNC (SYSDATE)
 FROM DUAL;
 
 
+--형 변환 함수
+
+-- DATE -> CHAR
+-- TO_CHAR(원본(날짜 데이터,'페턴')
+SELECT SYSDATE, 
+    TO_CHAR(SYSDATE, 'YYYY-MM-DD'),
+    TO_CHAR(SYSDATE, 'YYYY.MM.DD.'),
+    TO_CHAR(SYSDATE, 'YYYY-MM-DD DAY'),
+    TO_CHAR(SYSDATE,'YYYY.MM.DD. HH24:MI:SS')
+FROM DUAL;
+
+-- TO CHAR (NUMBER -> CHAR)
+-- TO CHAR(원본 숫자, 패턴)
+SELECT 123456789,
+    TO_CHAR(123456789, '000000000000'),
+    TO_CHAR(123456789, '000,000,000,000'),
+    TO_CHAR(123456789, '9999999999999999999999'),
+     TO_CHAR(123456789, '999,999,999,999,999,999,999'),
+     TO_CHAR(123456789, 'L999,999,999,999,999,999,999'),
+     TO_CHAR(123456789, '999,999') -- 범위를 넘어서면 오류가 발생한다.
+FROM DUAL;
+SELECT ENAME, TO_CHAR(SAL*1300,'999,999,999') AS WON
+FROM EMP;
+
+-- CAHR -> DATE
+-- TO_DATE(문자열, '패턴')
+select *
+from emp
+where hiredate = to_date('19810220','yyyymmdd');
+
+insert into emp values (9999,'son','manager',7788,
+to_date('04-2023-12','mm-yyyy-dd'),4000,null,10);
+select * from emp;
+rollback; --마지막 커밋 시점으로 회귀한다.
+
+-- char - number
+-- to_number('문자열','패턴') => 숫자 타입
+select '20000'-'10000'
+from dual; -- 자동 형변환해준다.
+select to_number('20,000','999,999,999')- to_number('10,000','999,999,999')
+from dual;
+
+SELECT ENAME, SAL, COMM, SAL*12+COMM, 
+NVL(COMM, 0), SAL*12+NVL(COMM, 0)
+FROM EMP
+ORDER BY JOB;
+
+-- decode 함수 : 동등비교이다. =비교 연산 후 결과를 출력한다. switch와 유사하다.
+SELECT ENAME, DEPTNO, 
+ DECODE(DEPTNO, 10, 'ACCOUNTING', 
+ 20, 'RESEARCH', 
+ 30, 'SALES', 
+40, 'OPERATIONS' ) 
+ AS DNAME
+FROM EMP;
+
+SELECT ENAME, JOB, SAL,
+DECODE(JOB,'ANAlYST',SAL*1.05,
+             'SALESMAN',SAL*1.10,
+           'MANAGER',SAL*1.15,
+            'CLERK',SAL*1.20
+            ) AS RAISESAL
+FROM EMP
+ORDER BY DEPTNO;
+
+
+SELECT ENAME, DEPTNO, 
+ DECODE(DEPTNO, 10, 'ACCOUNTING', 
+ 20, 'RESEARCH', 
+ 30, 'SALES', 
+40, 'OPERATIONS' ) 
+ AS DNAME
+ from emp;
+ 
+SELECT ename,deptno,
+ CASE WHEN DEPTNO=10 THEN 'ACCOUNTING' 
+ WHEN DEPTNO=20 THEN 'RESEARCH' 
+ WHEN DEPTNO=30 THEN 'SALES' 
+ WHEN DEPTNO=40 THEN 'OPERATIONS'
+ END AS DNAME
+FROM EMP;
+
+
+-- 그룹함수, 집합함수, 집계함수, 다중행 함수 
+-- 하나의 행이 아닌 다중행을 그룹으로 묶어서 처리
+-- sum,avg : 해당 칼럼에 있는 값을 구해준다. // 널은 값은 무시해버린다.(sum,avg,count)
+-- count : 행을 센다.
+-- max,min
+
+-- 급여 총액을 구해보자. 일반적으로 그룹함수 다음에 일반 칼럼 못나온다.
+select sum(sal), to_char(sum(sal),'999,999')
+from emp;
+
+-- 커미션의 총합
+select sum(comm), count(comm), avg(comm)
+from emp;
+-----------------------  동일하다
+select comm from emp
+where comm is not null;
+
+-- 평균 급여
+select avg(sal), trunc(avg(sal)), round(avg(sal),2)
+from emp;
+
+-- 최대 급여 max(), 최소 급여min()
+select max(sal), min(sal)
+from emp;
+
+-- count () => row 개수
+-- 전체 사원의 수
+select count(*)
+from emp;
+-- 10번 부서의 사원의 수
+select count(*)
+from emp 
+where deptno=10;
+-- 부서의 개수
+select count(*)
+from dept;
+
+-- 각 부서의 개수
+select distinct job 
+from emp
+order by job;
+select count(distinct job)
+from emp;
+
+SELECT COUNT(COMM)
+FROM EMP;
+
+-- 칼럼 단위로 묶는게 아니라 행 별로 묶고 싶다면 GROUP BY절
+SELECT * 
+FROM EMP
+ORDER BY DEPTNO;
+
+SELECT DEPTNO
+FROM EMP
+GROUP BY DEPTNO
+ORDER BY DEPTNO;
+
+-- 부서별 급여 평균을 구하는 것이다.
+SELECT DEPTNO, AVG(SAL)
+FROM EMP
+GROUP BY DEPTNO
+ORDER BY DEPTNO;
+
+-- GROUP BY => 행 단위로 그룹핑
+SELECT DEPTNO, COUNT(*) AS"사원의 수", SUM(SAL) AS "총 급여 액",
+                TRUNC(AVG(SAL)) AS "총 평균 급여 액",
+                MAX(SAL) AS "최고 급여 액",
+                MIN(SAL) AS "최소 급여 액",
+                COUNT(COMM) AS "커미션을 받는 사원의 수"
+FROM EMP
+GROUP BY DEPTNO
+-- HAVING AVG(SAL)>=2000
+ -- 그룹화된 데이터의 집합함수의 결과를 조건식으로 받을 때 HAVING
+ -- 총 급여액이 10,000을 넘어가는 그룹
+HAVING SUM(SAL) > 10000
+ORDER BY DEPTNO;
+
+SELECT JOB, COUNT(*), TRUNC(AVG(SAL)), SUM(SAL), MAX(SAL),MIN(SAL),MAX(SAL)-MIN(SAL)
+FROM EMP
+GROUP BY JOB;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
