@@ -86,9 +86,19 @@ FROM EMP NATURAL JOIN DEPT;
 
 -- 도서 판매 정보 출력
 
+-- 이름이 SCOTT인 사람의 부서명을 출력해봅시다. 
 
+select ename, dname, e.deptno as "부서번호"
+from emp e, dept d
+where e.deptno=d.deptno and ename='SCOTT';
 
+select * 
+from emp e, salgrade s
+where sal between losal and hisal;
 
+SELECT ENAME, SAL, GRADE
+FROM EMP, SALGRADE 
+WHERE SAL BETWEEN LOSAL AND HISAL;
 
 
 
