@@ -1,0 +1,191 @@
+-- 테이블의 변경 : 저장구조 (스키마의 구조 : 칼럼들의 집합)
+-- 칼럼의 변경 : 칼럼의 추가하는 것도 변경이다. 이는 테이블에 칼럼를 삭제, 칼럼의 내용이나 이름을 수정하는 것도
+-- 변경이라고 총칭한다.
+
+-- 테이블의 변경
+-- alter table
+-- add midify,dro
+-- emp 01 테이블에 칼럼을 추가해보자.
+alter table emp01 add (job varchar2(9));
+
+-- 직급(JOB) 칼럼을 최대 30글자까지 저장할 수 있게 변경해 보도록
+desc emp01;
+alter table emp01 modify (job varchar2(20) not null);
+
+alter table emp01 modify (job varchar2(50));
+
+
+select *
+from emp01;
+
+delete from emp01 where empno=1111;
+commit;
+
+-- emp01 테이블에서 job 칼럼을 삭제해보자
+alter table emp01 drop column job;
+desc emp01;
+
+-- 테이블 객체의 삭제 
+-- drop table 테이블 이름 => 스키마 삭제와 저장데이터의 삭제가 일어난다.
+-- DDL : 자동 COMMIT이다
+-- DML 작업중 DDL 작업은 신중하게 하자
+
+-- EMP01 테이블을 삭제해보자
+DROP TABLE EMP01;
+DESC EMP01;
+
+-- 테이블의 모든 행을 삭제 : TRUNCATE
+SELECT * FROM EMP02;
+TRUNCATE TABLE EMP02;
+-- DELETE는 행 단위 삭제이다
+
+-- 테이블 이름 변경
+-- RENAME 이전 이름 TO 새이름
+DESC DDL_tEST
+-- DDL_TEST => TEST로 바꿔보자
+RENAME DDL_TEST TO TEST;
+DESC TEST;
+
+-- 제약 조건의 필요성
+INSERT INTO DEPT VALUES(10,'TEST','TSET');
+
+-- NOT NULL 제약조건 : 설정한 칼럼에 NULL 값 입력을 금지하는 제약조건
+-- 컬럼 수준에서만 정의가 가능하다.
+DROP TABLE EMP02;
+-- 사원 테이블을 생성 : 사원번호, 사원이름, 직급, 부서명
+-- 사원번호, 사원이름에 NOT NULL 제약조건을 설정하자
+CREATE TABLE EMP02 (
+    EMPNO NUMBER (4) NOT NULL,
+    ENAME VARCHAR2(10) NOT NULL,
+    JOB VARCHAR2 (9),
+    DEPTNO NUMBER (2)
+);
+INSERT INTO EMP02 VALUES (NULL,NULL,'MANAGER',30);
+INSERT INTO EMP02 (JOB, DEPTNO) VALUES ('MANAGER',10);
+
+-- EMP 03생성 : 사원번호, 사원이름, 직급, 부서번호
+-- EMPNO : UNIQUE
+-- ENAME : NOT NULL
+CREATE TABLE EMP03(
+    EMPNO NUMBER (4) UNIQUE,
+    ENAME VARCHAR2(10) NOT NULL,
+    JOB VARCHAR2(9),
+    DEPTNO NUMBER (2)
+);
+DESC EMP03;
+-- UNIQUE : 칼럼 내부에 중복되는 데이터가 있으면 입력실패한다.
+INSERT INTO EMP03 VALUES (1111,'KING','MANAGER',10);
+INSERT INTO EMP03 VALUES (1111,'SON','MANAGER',10);
+
+SELECT * FROM EMP03;
+
+-- NOT NULL UNIQUE 함께 사용
+CREATE TABLE EMP01(
+    EMPNO NUMBER (4) NOT NULL UNIQUE,
+    ENAME VARCHAR2(10) NOT NULL,
+    JOB VARCHAR2(9),
+    DEPTNO NUMBER (2)
+);
+INSERT INTO EMP01 VALUES (1111,'KONG','MANAGER',40);
+
+-- 기본키 제약조건
+-- 칼럼 옆에 PRIMARY KEY 키워드 사용
+DROP TABLE EMP01;
+CREATE TABLE EMP01(
+    EMPNO NUMBER (4) PRIMARY KEY,
+    ENAME VARCHAR2(10) NOT NULL,
+    JOB VARCHAR2(9),
+    DEPTNO NUMBER (2)
+);
+
+DESC EMP01;
+INSERT INTO EMP01 VALUES (1111,'KONG','MANAGER',40);
+
+
+
+DROP TABLE EMP01;
+CREATE TABLE EMP01(
+    EMPNO NUMBER (4) constraint pk_emp01_empno PRIMARY KEY,
+    ENAME VARCHAR2(10) constraint NN_EMP01_ENAME NOT NULL,
+    JOB VARCHAR2(9)CONSTRAINT UK_EMP01_JOB UNIQUE,
+    DEPTNO NUMBER (2)
+);
+
+DESC EMP01;
+INSERT INTO EMP01 VALUES (1111,'KONG','MANAGER',40);
+
+
+-- 외래키 제약조건
+CREATE TABLE EMP01(
+    EMPNO NUMBER (4) constraint pk_emp01_empno PRIMARY KEY,
+    ENAME VARCHAR2(10) constraint NN_EMP01_ENAME NOT NULL,
+    JOB VARCHAR2(9)CONSTRAINT UK_EMP01_JOB UNIQUE,
+    DEPTNO NUMBER (2) CONSTRAINT FK_EMP01_DEPTNO REFERENCES DEPT (DEPTNO)
+);
+
+DESC EMP01;
+INSERT INTO EMP01 VALUES (1111,'KONG','NULL',70);
+
+
+-- CHECK : 범위, 값을 확인 후 입력 또는 수정
+CREATE TABLE EMP01(
+    EMPNO NUMBER (4) constraint pk_emp01_empno PRIMARY KEY,
+    ENAME VARCHAR2(10) constraint NN_EMP01_ENAME NOT NULL,
+    JOB VARCHAR2(9)CONSTRAINT UK_EMP01_JOB UNIQUE,
+    SAL NUMBER(7,2) CONSTRAINT CK_EMP01_SAL CHECK (SAL BETWEEN 800 AND 5000),
+    GENDER CHAR(1) CONSTRAINT CK_EMP01_GERNDER CHECK (GENDER IN ('M', 'W')),
+    DEPTNO NUMBER (2) CONSTRAINT FK_EMP01_DEPTNO REFERENCES DEPT (DEPTNO)
+);
+
+DESC EMP01;
+INSERT INTO EMP01 VALUES (1111,'KONG','MANAGER',1500,'W',40);
+
+--DEFAULT : 칼럼에 입력값이 없을 때 기본 값을 설정해서 데이터를 입력
+DROP TABLE EMP01;
+CREATE TABLE EMP01(
+    EMPNO NUMBER (4) constraint pk_emp01_empno PRIMARY KEY,
+    ENAME VARCHAR2(10) constraint NN_EMP01_ENAME NOT NULL,
+    JOB VARCHAR2(9)CONSTRAINT UK_EMP01_JOB UNIQUE,
+    SAL NUMBER(7,2) CONSTRAINT CK_EMP01_SAL CHECK (SAL BETWEEN 800 AND 5000),
+    GENDER CHAR(1) CONSTRAINT CK_EMP01_GERNDER CHECK (GENDER IN ('M', 'W')),
+    DEPTNO NUMBER (2) CONSTRAINT FK_EMP01_DEPTNO REFERENCES DEPT (DEPTNO),
+    HIREDATE DATE DEFAULT SYSDATE
+);
+
+DESC EMP01;
+INSERT INTO EMP01 VALUES (1111,'KONG','MANAGER',1500,'W',40,SYSDATE);
+
+INSERT INTO EMPO1 (EMPNO, ENAME, JOB, SAL, GENDER, DEPTNO)
+VALUES (1112,'SON','FREE',3000,'M',40);
+
+-- 테이블 레벨에서의 제약 조건
+DROP TABLE EMP01;
+CREATE TABLE EMP01 (
+    EMPNO NUMBER (4),
+    ENAME VARCHAR(10) NOT NULL,
+    JOB VARCHAR2(9),
+    SAL NUMBER (7,2),
+    GENDER CHAR(1),
+    DEPTNO NUMBER (2),
+    HIREDATE DATE DEFAULT SYSDATE,
+    CONSTRAINT PK_EMP01_EMPNO PRIMARY KEY (EMPNO),
+    CONSTRAINT UK_EMP01_JOB UNIQUE (JOB),
+    CONSTRAINT FK_EMP01_DEPTNO FOREIGN KEY(DEPTNO) REFERENCES DEPT(DEPTNO)
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
