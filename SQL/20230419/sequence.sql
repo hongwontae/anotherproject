@@ -1,21 +1,18 @@
---- 시퀀스 = 연속된 숫자를 생성해주는 객체
--- 시퀀스는 테이블 내의 유일한 숫자를 자동으로 생성하는 자동 번호 발생기이므로 시퀀스를 기본 키로 사
--- 용하게 되면 사용자의 부담을 줄일 수 있습니다.
--- CREATE SEQUENCE 이름 [OPTION]
-DROP SEQUENCE DEPT_DEPTNO_SEQ;
-CREATE SEQUENCE DEPT_DEPTNO_SEQ
-INCREMENT BY 10
-START WITH 10;
+-- sequence : 연속된 숫자를 생성해주는 객체
+-- create sequence 이름 [옵션]
 
--- 자동 생성된 값 : 시퀀스 객체이름.NEXTVAL
+drop sequence seq_dept_deptno;
+create sequence seq_dept_deptno
+start with 10
+increment by 10
+;
 
-SELECT DEPT_DEPTNO_SEQ.NEXTVAL
-FROM DUAL;
+-- 자동 생성된 값 : 시퀀스객체이름.nextval
+select seq_dept_deptno.nextval
+from dual;
+select * from dept01;
+insert into dept01 values(seq_dept_deptno.nextval, 'test이름', 'test위치');
 
-SELECT * FROM DEPT01;
-INSERT INTO DEPT01 VALUES(DEPT_DEPTNO_SEQ.NEXTVAL,'TSET이름', 'TEST위치');
-SELECT DEPT_DEPTNO_SEQ.CURRVAL FROM DUAL;
-
-
-SELECT * FROM DUAL;
+select seq_dept_deptno.currval
+from dual;
 
