@@ -2,12 +2,11 @@ package jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class SelectTest2 {
+public class SelectTest {
 
 	public static void main(String[] args)  {
 		
@@ -28,34 +27,32 @@ public class SelectTest2 {
 			//Connection conn = DriverManager.getConnection(dbUrl, "himedia", "tiger");
 			
 			// 3. Statement / PreparedStatement => sql 실행 요청 메소드
-					
+			Statement stmt = conn.createStatement();
+			
 			//sql
-			String sql = "select * from dept where deptno=?";			
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			// ? 파라미터 설정
-			pstmt.setInt(1, 10);
+			String sql = "select deptno, dname, loc from dept order by deptno";
 			
 			// 4. select의 결과 데이터는 ResultSet 객체로 받는다.
-			// select 실행 메소드 : executeQuery()
-			ResultSet rs = pstmt.executeQuery();
-						
+			// select 실행 메소드 : executeQuery(String sql)
+			ResultSet rs = stmt.executeQuery(sql);
+			
 			// 5. ResultSet 객체에서 데이터 추출
-//			while(rs.next()) {
-//				System.out.println(rs.getInt(1) + "\t" 
-//								+ rs.getString(2) + "\t" 
-//								+ rs.getString(3));
-//			}
-			
-			if(rs.next()) {
-				System.out.println(rs.getInt(1) + "\t" 
-								+ rs.getString(2) + "\t" 
-								+ rs.getString(3));
+			while(rs.next()) {
+				//int deptno = rs.getInt("deptno");
+				//String dname = rs.getString("dname");
+				//String loc = rs.getString("loc");
+				
+				int deptno = rs.getInt(1);
+				String dname = rs.getString(2);
+				String loc = rs.getString(3);
+				
+				System.out.println(deptno + "\t" + dname + "\t" + loc);				
+				
 			}
-			
+						
 			rs.close();
-			pstmt.close();
+			stmt.close();
 			conn.close();
-			
 			
 			
 		} catch (SQLException e) {
@@ -69,3 +66,4 @@ public class SelectTest2 {
 	}
 
 }
+
