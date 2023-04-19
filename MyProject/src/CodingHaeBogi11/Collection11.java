@@ -1,4 +1,4 @@
-package Collection;
+package CodingHaeBogi11;
 
 import java.util.ArrayList;
 import java.util.HashMap;
