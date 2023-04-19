@@ -22,7 +22,7 @@ public class ConnectionTest {
 			
 			// Mysql 연결
 			String dbUrl = "jdbc:mysql://localhost:3306/project";
-			Connection conn = DriverManager.getConnection(dbUrl, "himedia", "tiger");
+			Connection conn = DriverManager.getConnection(dbUrl, "himidia", "tiger");
 			
 			// 3. Statement / PreparedStatement => sql 실행 요청 메소드
 			

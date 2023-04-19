@@ -20,7 +20,7 @@ public class DeleteTest {
 			// jdbcUrl
 			// Oracle 연결
 			String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe";
-			conn = DriverManager.getConnection(dbUrl, "hr", "tiger");
+			conn = DriverManager.getConnection(dbUrl, "hr", "TIGER");
 			
 			// 트렌젝션 설정
 			conn.setAutoCommit(false);
