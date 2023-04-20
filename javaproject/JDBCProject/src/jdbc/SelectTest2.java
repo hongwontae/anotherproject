@@ -21,7 +21,7 @@ public class SelectTest2 {
 			// jdbcUrl
 			// Oracle 연결
 			String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe";
-			Connection conn = DriverManager.getConnection(dbUrl, "hr", "tiger");
+			Connection conn = DriverManager.getConnection(dbUrl, "hr", "TIGER");
 			
 			// Mysql 연결
 			//String dbUrl = "jdbc:mysql://localhost:3306/project";
@@ -32,8 +32,9 @@ public class SelectTest2 {
 			//sql
 			String sql = "select * from dept where deptno=?";			
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			// ? 파라미터 설정
+			// ? 파라미터 설정 ?파라미터 역할을 해준다.
 			pstmt.setInt(1, 10);
+			// ? SET => ?를 채워준다.
 			
 			// 4. select의 결과 데이터는 ResultSet 객체로 받는다.
 			// select 실행 메소드 : executeQuery()

@@ -20,7 +20,7 @@ public class DeleteTest {
 			// jdbcUrl
 			// Oracle 연결
 			String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe";
-			conn = DriverManager.getConnection(dbUrl, "hr", "TIGER");
+			conn = DriverManager.getConnection(dbUrl, "hr", "tiger");
 			
 			// 트렌젝션 설정
 			conn.setAutoCommit(false);
@@ -36,6 +36,7 @@ public class DeleteTest {
 			pstmt.setInt(1, 50);
 						
 			int result = pstmt.executeUpdate();
+			// 1이 나온다.
 			
 			if(result==1) {
 				System.out.println("데이터가 삭제되었습니다.");

@@ -32,8 +32,11 @@ public class InsertTest {
 			pstmt.setInt(1, 50);
 			pstmt.setString(2,"개발팀");
 			pstmt.setString(3, "서울");
+			//파라미터 인덱스, 값
 			
 			int result = pstmt.executeUpdate();
+			// 처리된 값의 개수를 반환한다.
+			// DML 실행 요청하고 결과 반환해주는 메서드가 executeupdate()다.
 			
 			if(result>0) {
 				System.out.println("데이터가 입력되었습니다.");
