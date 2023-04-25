@@ -25,6 +25,7 @@ hs_err_pid*
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,eclipse
 
 ### Eclipse ###
+servers/
 .metadata
 bin/
 tmp/
