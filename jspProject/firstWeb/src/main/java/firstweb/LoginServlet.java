@@ -9,36 +9,55 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/Login")
+@WebServlet("/auth/login") // localhost:8080/web/auth/login
 public class LoginServlet extends HttpServlet {
-       
 
-
-	protected void doPost(HttpServletRequest request,
-				HttpServletResponse response)
+	@Override
+	protected void doGet(
+			HttpServletRequest request, 
+			HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		/////////////////////////////////////////////
-		//사용자 요청 처리
-		String userId = request.getParameter("userId");
-		System.out.println("사용자 입력 id : "+ userId);
-		
+
+		////////////////////////////////
+		// 사용자 요청 처리		
+
+		String userid = request.getParameter("userid");
+		System.out.println("사용자 입렵 id : " + userid);
+
 		String password = request.getParameter("password");
-		System.out.println("사용자 입력 pw : "+password);
-		
-		///////////////////////////////////
+		System.out.println("사용자 입력 PW : " + password);
+
+		/////////////////////////////////
 		// 응답
-		
+
 		PrintWriter out = response.getWriter();
-		
-		out.println("사용자 입력 id : "+ userId);
-		out.println("사용자 입력 pw : "+ password);
+		out.println("id : " + userid);
+		out.println("PW : " + password);
 		out.close();
-		
-		
-		
-		
+	}
+
+	protected void doPost(
+			HttpServletRequest request, 
+			HttpServletResponse response)
+			throws ServletException, IOException {
+
+		////////////////////////////////
+		// 사용자 요청 처리
+
+		String userid = request.getParameter("userid");
+		System.out.println("사용자 입렵 id : " + userid);
+
+		String password = request.getParameter("password");
+		System.out.println("사용자 입력 PW : " + password);
+
+		/////////////////////////////////
+		// 응답
+
+		PrintWriter out = response.getWriter();
+		out.println("id : " + userid);
+		out.println("PW : " + password);
+		out.close();
+
 	}
 
 }
