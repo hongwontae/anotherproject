@@ -11,14 +11,11 @@ public class ConnectionProvider {
 		// Connection 객체 구하기
 		String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe";
 		
-		return DriverManager.getConnection(dbUrl, "hr", "TIGER");
+		return DriverManager.getConnection(dbUrl, "hr", "tiger");
 
 	}
 
 }
-
-
-
 
 
 

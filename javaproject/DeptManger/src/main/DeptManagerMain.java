@@ -1,90 +1,81 @@
-package service;
+package main;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.List;
+import java.util.Scanner;
 
-import dao.DeptDao;
-import domain.Dept;
-import util.ConnectionProvider;
+import controller.DeptDeleteController;
+import controller.DeptInsertController;
+import controller.DeptListController;
+import controller.DeptSearchController;
+import controller.DeptUpdateController;
+import controller.FrontController;
 
-public class DeptListService {
-
-	DeptDao dao;
-
-	private DeptListService() {
-		this.dao = DeptDao.getInstance();
-	}
+public class DeptManagerMain {
 	
-	private static DeptListService service = new DeptListService();
-	
-	public static DeptListService getInstance() {
-		return service;
-	}
-
-	public List<Dept> getDeptList() {
-		
-		Connection conn = null;
-		List<Dept> list = null;
-		
-		try {
-			// Connection 객체 구하기
-			//String dbUrl = "jdbc:oracle:thin:@localhost:1521:xe";
-			//conn = DriverManager.getConnection(dbUrl, "hr", "tiger");
-			
-			conn = ConnectionProvider.getConnection();
-			
-			// 트랜젝션 시작
-			conn.setAutoCommit(false);
-			
-			// insert(conn)
-			// update(conn)
-			// select(conn)
-			// update(conn)
-			// insert(conn)
-			
-			list = dao.selectByAll(conn);
-			
-			// commit : 완료!
-			conn.commit();
-			
-		} catch (SQLException e) {
-			// 예외 발생 -> rollback
-			if(conn != null) {
-				try {
-					conn.rollback();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-			
-			e.printStackTrace();
-		} finally {
-			if(conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		}
-		
-		return list;
-
-	}
+	public static Scanner sc = new Scanner(System.in);
 	
 	public static void main(String[] args) {
 		
-		DeptListService listService = new DeptListService();
-		List<Dept> list = listService.getDeptList();
+		 
+		FrontController frontController = new FrontController(); 
 		
-		for(Dept d : list) {
-			System.out.println(d);
+		/// Controller : view -> Service -> Dao -> Service -> Controller : view
+		
+		
+		while(true) {
+			System.out.println("메뉴를 입력하세요.");
+			System.out.println("1. 부서 리스트 출력");
+			System.out.println("2. 부서 검색");
+			System.out.println("3. 부서 입력");
+			System.out.println("4. 부서 수정");
+			System.out.println("5. 부서 삭제");
+			System.out.println("6. 프로그램 종료");
+			
+			int menu = Integer.parseInt(sc.nextLine());
+			
+			if(menu==6) {
+				System.out.println("프로그램이 종료합니다.");
+				return;
+			}
+			
+			frontController.menu.get(menu).process();
+			
+			
+			
+//			switch(menu) {
+//			case 1:
+//				DeptListController.getInstance().process();
+//				//new DeptListController().getDeptList();
+//				break;
+//			case 2:
+//				DeptSearchController.getInstance().process();
+//				//new DeptSearchController().searchDept();
+//				break;
+//			case 3 : 
+//				DeptInsertController.getInstance().process();
+//				//new DeptInsertController().insertDept();
+//				break;
+//			case 4 :
+//				DeptUpdateController.getInstance().process();
+//				//new DeptUpdateController().updateDept();
+//				break;
+//			case 5:
+//				DeptDeleteController.getInstance().process();
+//				//new DeptDeleteController().deleteDept();
+//				break;
+//			case 6:
+//				System.out.println("프로그램이 종료됩니다.");
+//				return;
+//			}
+		
 		}
 		
+		
+		
+		
+		
+		
+		
+		
 	}
-	
+
 }
