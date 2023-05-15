@@ -18,7 +18,7 @@
 <h3>${Todo}</h3>
 
 <a href="/todo/modify">수정</a><br>
-<a href="/todo/delete">삭제</a>
+<a href="/todo/delete?tno=11">삭제</a>
 <!-- a태그 눌러서 가는것은 get방식으로 간다. -->
 
 
