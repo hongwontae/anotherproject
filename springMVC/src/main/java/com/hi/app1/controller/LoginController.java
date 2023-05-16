@@ -14,29 +14,35 @@ import javax.servlet.http.HttpSession;
 @Log4j2
 public class LoginController {
 
-    //doget메서드
     @RequestMapping(method = RequestMethod.GET)
     public String loginForm(){
-        log.info("/login... /login...");
+        log.info("get  |  /login ");
+
         return "member/loginForm";
     }
 
-    //dopost메서드
     @RequestMapping(method = RequestMethod.POST)
-    public  String login(
-            HttpServletRequest request
-
+    public String login(
+            HttpServletRequest request,
+            RedirectAttributes redirectAttributes
     ){
+        log.info("post  |  /login");
 
-        log.info("get || post");
-
-        //로그인 처리
+        // 로그인 처리
         HttpSession session = request.getSession();
-        session.setAttribute("loginInfo","login");
+        session.setAttribute("loginInfo", "Login");
         log.info("로그인 처리");
 
-        //post처리 후 redirect
-        return "redirect:/sample/sample01";
-        // http://localhost8080/sample/sample01
+        redirectAttributes.addAttribute("no", 10);
+        redirectAttributes.addAttribute("page", 13);
+        redirectAttributes.addFlashAttribute("type", "user");
+
+
+        // post 처리 후 redirect
+        return "redirect:/sample/sample1";
+        // http://localhost:8080/sample/sample1
     }
+
+
+
 }

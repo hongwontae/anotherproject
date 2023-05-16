@@ -11,29 +11,31 @@ import javax.servlet.http.HttpSession;
 @Log4j2
 public class AuthCheckInterceptor implements HandlerInterceptor {
 
-    // servlet context에 등록할 것이다.
+    // servlet-context.xml 에 등록
 
     @Override
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response,
-                             Object handler) throws Exception {
+    public boolean preHandle(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handler) throws Exception {
 
-        log.info(">>>>> 회원 로그인 여부 체크 :<<<<< ");
+        log.info(">>>>>  회원 로그인 여부 체크   <<<<<");
 
-        //session 획득, 현재 세션이 존재하지 않으면 null을 반환한다.
+        // session 획득 : 현재 세션이 존재하지 않으면 => null 반환
         HttpSession session = request.getSession(false);
 
-        // 회원이 로그인 했을 떄 체크가 필요 : return true; => 다음 인터셉터 또는 실행 컨트롤러로 진입한다.
-        // session이 널이 아니고, get attirbute("loginInfo")가 null이 아니면 => 로그인 상태이다.
-        if(session != null && session.getAttribute("loginInfo") != null){
-            log.info("회원 로그인 체크... 로그인 상태!!!");
+        // 회원이 로그인 했을 떄 체크 : return true -> 다음 인터셉터 또는 실행 컨트롤러 진입
+        // session 이 null 이 아니고,
+        // getAttribute("loginInfo") null 이 아니면 => 로그인 상태
+        if (session != null && session.getAttribute("loginInfo") != null){
+            log.info("회원 로그인 체크 : 로그인 상태!!!");
             return true;
         }
-        
-        log.info("회원 로그인 체크 : 비 로그인 상태");
-        // 로그인 페이지로 이동하도록
+
+        log.info("회원 로그인 체크 : 비 로그인 상태!!!");
+        // Login 페이지로 이동
         response.sendRedirect("/login");
-        
+
         return false;
     }
 

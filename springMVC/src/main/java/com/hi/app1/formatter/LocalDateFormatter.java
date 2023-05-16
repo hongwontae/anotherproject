@@ -7,14 +7,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-public class localDateFormatter implements Formatter <LocalDate> {
-
-
+public class LocalDateFormatter implements Formatter<LocalDate> {
     @Override
     public LocalDate parse(String text, Locale locale) throws ParseException {
 
-        // 사용자가 전달하는 파라미터는(String) => localDate
-        return LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        // 사용자가 전달하는 파라미터(String) => LocalDate
+        return LocalDate.parse(text, DateTimeFormatter.ofPattern("yyyy-MM-dd")) ;
     }
 
     @Override

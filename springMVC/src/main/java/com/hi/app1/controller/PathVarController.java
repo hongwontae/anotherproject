@@ -8,20 +8,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Log4j2
-public class pathVarController {
+public class PathVarController {
 
-    //경로의 일부분을 변수로 사용하겠다.
-    @RequestMapping("/members/{type}/{idx}") //http://localhost:8080/members/10
+    @RequestMapping("/members/{type}/{idx}") // http://localhost:8080/members/user/10
     public String getMemberInfo(
             @PathVariable("idx") String idx,
             @PathVariable("type") String type,
             Model model
     ){
+        log.info("type = " + type);
+        log.info("idx = " + idx);
 
-        log.info("idx = "+idx);
-        log.info("type : "+type);
-        model.addAttribute("idx",idx);
-        model.addAttribute("type",type);
+        model.addAttribute("idx", idx);
+        model.addAttribute("type", type);
+
         return "member/info";
     }
 

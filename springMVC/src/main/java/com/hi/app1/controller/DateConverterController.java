@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.time.LocalDate;
 
-@Log4j2
 @Controller
 @RequestMapping("/date")
+@Log4j2
 public class DateConverterController {
 
     @GetMapping
-    public String getDateForm() {
+    public String getDateForm(){
         return "dateForm";
     }
 
@@ -23,13 +23,13 @@ public class DateConverterController {
     public String date(
             LocalDate date,
             UserRequest userRequest
-    ) {
-        log.info("date : "+date);
-        log.info("userRequest.getDate()"+userRequest.getDate());
+    ){
 
-
+        log.info("date : " + date);
+        log.info("userRequest.getDate() : " + userRequest.getDate());
 
         return "date";
     }
+
 
 }

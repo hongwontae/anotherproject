@@ -1,6 +1,5 @@
 package com.hi.app1.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +14,7 @@ public class HelloController {
         // view에 공유할 결과 데이터를 가지고 있는 객체
         ModelAndView mav = new ModelAndView();
         // view 경로를 설정(지정)
-        mav.setViewName("hello"); // WEB-INF-views/hello.jsp이다.
+        mav.setViewName("hello"); // WEB-INF-views/hello.jsp이다. //뷰의 경로
 
         // service한테 요청받아서 응답 데이터를 공유하는 과정
         mav.addObject("greeting","Hello!!");
