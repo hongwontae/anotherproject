@@ -20,7 +20,7 @@ public class DeptRegistController {
     @GetMapping
     public String registForm(){
         log.info("GET /dept/regist");
-        return "registForm";
+        return "dept/registForm";
     }
 
     @PostMapping

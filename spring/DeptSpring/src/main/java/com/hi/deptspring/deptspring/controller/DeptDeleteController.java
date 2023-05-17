@@ -18,9 +18,11 @@ public class DeptDeleteController {
     public String delete(
             @RequestParam("no") int deptno
     ){
+        log.info(" /dept/delete");
 
-        log.info(" /dept/delete ");
-        deleteService deleteDept(deptno);
+        deleteService.deleteDept(deptno);
+        log.info(deptno + "번 부서 삭제");
+
         return "redirect:/dept/list";
     }
 

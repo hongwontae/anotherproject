@@ -13,5 +13,4 @@ public class DeptDeleteService {
     public int deleteDept(int deptno){
         return mapper.deleteDept(deptno);
     }
-
 }

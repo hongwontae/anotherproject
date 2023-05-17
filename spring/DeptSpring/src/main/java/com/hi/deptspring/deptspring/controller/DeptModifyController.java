@@ -1,6 +1,7 @@
 package com.hi.deptspring.deptspring.controller;
 
 import com.hi.deptspring.deptspring.domain.DeptDTO;
+import com.hi.deptspring.deptspring.service.DeptModifyService;
 import com.hi.deptspring.deptspring.service.DeptReadService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +12,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Log4j2
 @Controller
 @RequestMapping("/dept/modify")
+@Log4j2
 public class DeptModifyController {
 
     @Autowired
     private DeptReadService readService;
 
+    @Autowired
+    private DeptModifyService modifyService;
+
     @GetMapping
     public String getModifyForm(
-        @RequestParam("no") int deptno,
-        Model model
+            @RequestParam("no") int deptno,
+            Model model
     ){
-
-        model.addAttribute("dept",readService.getDept(deptno));
+        log.info("GET /dept/modify");
+        model.addAttribute("dept", readService.getDept(deptno));
         return "dept/modifyForm";
     }
 
@@ -33,8 +37,11 @@ public class DeptModifyController {
     public String modify(
             DeptDTO dto
     ){
-        log.info("post  /dept/modify");
+        log.info("POST /dept/modify");
         log.info(dto);
+
+        modifyService.modifyDept(dto);
+
         return "redirect:/dept/list";
     }
 }

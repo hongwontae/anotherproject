@@ -10,6 +10,7 @@ import lombok.ToString;
 @Data
 @ToString
 public class DeptRegistRequest {
+
     private String dname;
     private String loc;
 
