@@ -11,5 +11,4 @@ public class BoardSearchOption {
 
     private String searchType;
     private String keyword;
-
 }

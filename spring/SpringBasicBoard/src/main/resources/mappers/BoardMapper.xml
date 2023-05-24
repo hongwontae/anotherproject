@@ -7,7 +7,8 @@
             parameterType="com.hi.board.domain.PageOption"
             resultType="com.hi.board.domain.BoardDTO"
     >
-        select *
+        select
+        bno, title, content, file, uname as writer,memidx, regdate,updatedate
         from tbl_board
 
         <where>
@@ -84,7 +85,8 @@
             parameterType="com.hi.board.domain.RequestRegBoard">
 
         <!-- file : 파일의 이름을 저장하는 문자열 -->
-        insert into tbl_board (title, content, writer, file)
+        <!--writer -> memidx로 변경 -->
+        insert into tbl_board (title, content, memidx, file)
 
         values (#{title}, #{content}, #{writer}, #{filename})
 

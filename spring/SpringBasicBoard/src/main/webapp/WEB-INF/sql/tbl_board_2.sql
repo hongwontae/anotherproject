@@ -3,6 +3,7 @@ create table tbl_board (
                            title varchar(200) not null,
                            content varchar(2000) not null,
                            writer varchar(50) not null,
+                           file varchar(1000) not null,
                            regdate date default (now()),
                            updatedate date default (now())
 );
