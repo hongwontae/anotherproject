@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        let menu = {
+            productName : 'Americano',
+            price : '3000',
+            catrgory : 'Coffee',
+            makeCoffee : function(){
+                console.log(`${this['productName']}는 원두 20g과 뜨거운 물 120ml로 만든다.`)
+            },
+
+        }
+
+
+        console.log(menu, typeof menu) //typeof 가로 생략이 가능하다.
+        console.log('주문 메뉴', menu.productName)
+        console.log('주문 가격',menu['price'])
+
+        // 객체의 메서드 호출
+        menu.makeCoffee()
+
+        // 동적 속성 추가
+        // {} 필요한 속성들을 추가 => 객체이름.속성이름=데이터
+        menu.event = false
+        console.log(menu)
+
+        // if(menu.event){
+        //     alert('할인 이벤트 진행 중입니다.')
+        // } else {
+        //     alert('이벤트 시마이')
+        // }
+
+        // 동적으로 속성을 삭제
+        // delete 키워드 이용한다.
+        delete menu.event
+        console.log('속성 제거', menu)
+
+        // 기본형 데이터의 일시적 승급
+        // 기본데이터 => 객체 
+
+        let num =100
+        console.log(num.toString(),typeof(num))
+        let numObject = new Number(100)
+        console.log(numObject.toString(),typeof(numObject))
+        
+        // prototype을 이용한 공통 메서드 추가
+        // 불필요한 메서드 코드를 메모리에 저장하지 않기 위한 방법이다.
+        // 필요한 메서드 코드 하나만 등록하고 활용한다.
+        // 객체 타입.prototype.속성이름 = function(){}
+
+        Number.prototype.nickname = 'KING'
+        Number.prototype.tell = function(){
+            console.log('안녕하세요')
+        }
+
+        let num2 = 10;
+        console.log(num2.nickname)
+        num2.tell()
+        
+
+        // 기본객체 타입
+        // Number, String, Ayyay, Date,,Json
+
+        let num3 = 3.141592
+        console.log(num3.toFixed(2))
+
+        let numObject3 = new Number(3.14159)
+        console.log(numObject3.toString(), numObject3.toFixed(2))
+
+        console.log()
+
+        //String 객체
+        let str1 = '안녕하세요'
+        console.log(str1)
+        console.log(str1.trim())
+        console.log(str1.length)
+
+        let str2 = '010-9999-7777'
+        let phoneNumbers = str2.split('-')
+        console.log(phoneNumbers)
+
+        //json
+        // json객체는 js obj를 json 형식의 문자열로 변경
+        // json형식의 문자열은 자바스크립트에서 사용할 수 있는 오브젝트로 변경하는 메서드를 갖고 있다.
+
+        let person={
+            name :'son',
+            age : 30
+        } 
+
+        // ogj => string
+        let strjson = JSON.stringify(person)
+
+        console.log('--------------------------------------------------')
+        console.log(person, typeof(person))
+        console.log(strjson, typeof(strjson))
+
+        // string => obj
+        let jsonObj = JSON.parse(strjson)
+        console.log(jsonObj)
+
+        // [] : 배열
+        // Array : new Array() => 내용이 없는 배열 생성한다.
+        // new Array(숫자) -> 사이즈
+        // new Array(1,2,3,4,5) -> [1,2,3,4,5]
+
+        let arr1 = [1,2,3,4,5]
+        let arr2 = new Array()
+        let arr3 = new Array(10)
+        let arr4 = new Array(1,2,3,4,5)
+        console.log(arr1)
+        console.log(arr2)
+        console.log(arr3)
+        console.log(arr4)
+
+        // Date는 날짜
+        const now = new Date();
+        console.log(now.getHours()-12)
+
+        //Math 수학함수 (스태틱처럼 활용한다.)
+        console.log(Math.floor(3.141592))
+        console.log(Math.floor(Math.random()*10+1))
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
